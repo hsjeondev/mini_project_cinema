@@ -7,16 +7,24 @@ public class Movie {
 	private int movieNo;
 	private String movieTitle;
 	private int runningTime;
-	private LocalDateTime startDate;
-	private LocalDateTime endDate;
+	private String startDate;
+	private String endDate;
 	private int movieViews;
 	private int moviePrice;
 	
 	
 	public Movie() {}
 
+	public Movie(String movieTitle,int runningTime,String startDate,String endDate,int moviePrice) {
+		this.movieTitle = movieTitle;
+		this.runningTime = runningTime;
+		this.startDate = startDate;
+		this.endDate = endDate;
+		this.moviePrice = moviePrice;
+	}
+	
 
-	public Movie(int movieNo, String movieTitle, int runningTime, LocalDateTime startDate, LocalDateTime endDate,
+	public Movie(int movieNo, String movieTitle, int runningTime, String startDate, String endDate,
 			int movieViews, int moviePrice) {
 		super();
 		this.movieNo = movieNo;
@@ -59,22 +67,22 @@ public class Movie {
 	}
 
 
-	public LocalDateTime getStartDate() {
+	public String getStartDate() {
 		return startDate;
 	}
 
 
-	public void setStartDate(LocalDateTime startDate) {
+	public void setStartDate(String startDate) {
 		this.startDate = startDate;
 	}
 
 
-	public LocalDateTime getEndDate() {
+	public String getEndDate() {
 		return endDate;
 	}
 
 
-	public void setEndDate(LocalDateTime endDate) {
+	public void setEndDate(String endDate) {
 		this.endDate = endDate;
 	}
 

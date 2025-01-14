@@ -2,6 +2,7 @@ package com.movie.view;
 
 import java.util.Scanner;
 
+import com.movie.controller.MovieController;
 import com.movie.controller.ScreeningController;
 import com.movie.controller.UserController;
 import com.movie.model.vo.User;
@@ -10,6 +11,7 @@ public class Menu {
 	private Scanner sc = new Scanner(System.in);
 	private ScreeningController screening = new ScreeningController();
 	private UserController uc = new UserController();
+	private MovieController mc = new MovieController();
 	
 	public void mainMenu(){
 		System.out.println("이꿜스 영화관에 오신걸 환영합니다");
@@ -90,12 +92,15 @@ public class Menu {
 		System.out.print("영화가격 : ");
 		int moviePrice = sc.nextInt();
 		sc.nextLine();
-		
-		
-		
-		
+		int result = mc.insertMovieOne(movieTitle, runningTime, startDate, endDate, moviePrice);
+		dmlResultPrint(result,"추가");
 		
 	}
+	public void dmlResultPrint(int result, String menuName) {
+		if(result > 0) System.out.println(menuName+"이(가) 정상 수행되었습니다.");
+		else System.out.println(menuName+"중 오류가 발생하였습니다.");
+	}
+	
 	public void login() {
 		System.out.println("===== 로그인 =====");
 		System.out.print("아이디 : ");
