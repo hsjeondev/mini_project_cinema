@@ -24,6 +24,7 @@ public class Screening {
 		this.Seat = seat;
 	}
 	
+	
 	// 제목
 	// 조회순
 	
