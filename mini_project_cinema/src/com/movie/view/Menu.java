@@ -39,7 +39,20 @@ public class Menu {
 		
 	
 	}
+
+	public void managerMenu() {
+		System.out.println("=== 관리자 메뉴 ===");
+	}
+	public void userMenu() {
+		System.out.println("=== 유저 메뉴 ===");
+	}
 	
+	
+	public void insertMovieOne() {
+		System.out.println("*** 영화 추가 ***");
+		System.out.println("새로운 영화를 추가할 정보를 입력해주세요!!");
+		System.out.println("(제목, 러닝타임, 방영시작기간, 방영종료기간, 영화가격)");
+	}
 	public void login() {
 		System.out.print("아이디 : ");
 		String id = sc.nextLine();
