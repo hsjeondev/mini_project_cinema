@@ -11,7 +11,7 @@ public class Screening {
 	public Screening() {
 		
 	}
-
+	
 	public Screening(int screeningNumber, String airingDate, String airingTime, int movieNumber, int theater,
 			int seat) {
 		this.screeningNumber = screeningNumber;

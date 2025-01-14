@@ -17,18 +17,18 @@ public class ScreeningDao {
 		ResultSet rs = null;
 		List<Movie> list = new ArrayList<Movie>();
 		try {
-			String sql = "SELECT m.movie_title "
-					+ ",m.movie_views "
-					+ "from screening sc "
-					+ "JOIN movie m "
-					+ "ON sc.movie_no=m.movie_no ";
+			String sql = "SELECT m.movie_title, "
+					+ "    RANK() OVER (ORDER BY m.movie_views DESC) AS rank "
+					+ "FROM screening sc "
+					+ "RIGHT JOIN movie m "
+					+ "ON sc.movie_no=m.movie_no ;";
 			pstmt = conn.prepareStatement(sql);
 			rs = pstmt.executeQuery();
 			
 			while(rs.next()) {
 				Movie mo = new Movie();
-//				mo.setMovie_no(rs.getInt("movie_no"));
-				
+				mo.setMovieTitle(rs.getString("movie_title"));
+				list.add(mo);
 			}
 		}catch(Exception e) {
 			e.printStackTrace();

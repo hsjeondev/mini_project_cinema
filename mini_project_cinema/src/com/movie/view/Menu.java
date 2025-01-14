@@ -140,6 +140,9 @@ public class Menu {
   public void movieRank() {
 	  	System.out.println("=-=상영 정보 확인=-=");
 		List<Movie> list = screening.movieRank();
+		for(Movie m : list) {
+			System.out.println(m);
+		}
 		System.out.print("영화를 선택하시겠습니까? (Y/N) : ");
 		String yesOrNo = sc.next();
 		if("Y".equals(yesOrNo)) {

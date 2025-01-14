@@ -12,7 +12,10 @@ public class Movie {
 	
 	
 	public Movie() {}
-
+	public Movie(String movieTitle) {
+		this.movieTitle=movieTitle;
+	}
+	
 	public Movie(String movieTitle,int runningTime,String startDate,String endDate,int moviePrice) {
 		this.movieTitle = movieTitle;
 		this.runningTime = runningTime;
