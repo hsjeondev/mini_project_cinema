@@ -41,9 +41,11 @@ public class Menu {
 	}
 
 	public void managerMenu() {
-		
+		System.out.println("=== 관리자 메뉴 ===");
 	}
-	
+	public void userMenu() {
+		System.out.println("=== 유저 메뉴 ===");
+	}
 	
 	
 	public void insertMovieOne() {
