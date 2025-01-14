@@ -20,6 +20,7 @@ public class Menu {
 			
 			switch(menu) {
 				case 1 : signIn();break;
+				case 2 : insertMovieOne();break;
 			}
 		}
 	}
@@ -36,10 +37,16 @@ public class Menu {
 		
 	
 	}
-  
-  public void movieRank() {
-
-//		List<Screening> list = screening.movieRank();
+	public void managerMenu() {
+		
+	}
+	
+	
+	
+	public void insertMovieOne() {
+		System.out.println("*** 영화 추가 ***");
+		System.out.println("새로운 영화를 추가할 정보를 입력해주세요!!");
+		System.out.println("(제목, 러닝타임, 방영시작기간, 방영종료기간, 영화가격)");
 	}
 	
 }
