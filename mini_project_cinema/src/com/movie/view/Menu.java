@@ -1,9 +1,13 @@
 package com.movie.view;
 
 import java.util.Scanner;
+import java.util.List;
+import com.movie.controller.ScreeningController;
+import com.movie.model.vo.Screening;
 
 public class Menu {
 	private Scanner sc = new Scanner(System.in);
+  private ScreeningController screening = new ScreeningController();
 	
 	public void mainMenu(){
 		System.out.println("이꿜스 영화관에 오신걸 환영합니다");
@@ -30,7 +34,12 @@ public class Menu {
 		System.out.println("전화번호 입력 : ");
 		int phone = sc.nextInt();
 		
-		
+	
+	}
+  
+  public void movieRank() {
+
+//		List<Screening> list = screening.movieRank();
 	}
 	
 }
