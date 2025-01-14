@@ -1,9 +1,5 @@
 package com.movie.model.vo;
 
-
-import java.time.LocalDate;
-import java.time.LocalTime;
-
 public class Screening {
 	private int screeningNumber;
 	private String airingDate;
