@@ -47,9 +47,9 @@ public class Menu {
 		String pw = sc.nextLine();
 		User user = null;
 		if("admin".equals(user.getUserId())) {
-			// 관리자 메뉴
+//			managerMenu();
 		} else {
-			// 사용자 메뉴
+//			userMenu();
 		}
 	}
   
