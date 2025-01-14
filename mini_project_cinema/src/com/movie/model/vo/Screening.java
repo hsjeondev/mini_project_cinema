@@ -1,12 +1,13 @@
 package com.movie.model.vo;
 
-import java.sql.Date;
-import java.sql.Time;
+
+import java.time.LocalDate;
+import java.time.LocalTime;
 
 public class Screening {
 	private int screeningNumber;
-	private Date airingDate;
-	private Time airingTime;
+	private String airingDate;
+	private String airingTime;
 	private int movieNumber;
 	private int theater;
 	private int Seat;
@@ -15,7 +16,8 @@ public class Screening {
 		
 	}
 
-	public Screening(int screeningNumber, Date airingDate, Time airingTime, int movieNumber, int theater, int seat) {
+	public Screening(int screeningNumber, String airingDate, String airingTime, int movieNumber, int theater,
+			int seat) {
 		this.screeningNumber = screeningNumber;
 		this.airingDate = airingDate;
 		this.airingTime = airingTime;
@@ -23,6 +25,59 @@ public class Screening {
 		this.theater = theater;
 		this.Seat = seat;
 	}
+
+	public int getScreeningNumber() {
+		return screeningNumber;
+	}
+
+	public void setScreeningNumber(int screeningNumber) {
+		this.screeningNumber = screeningNumber;
+	}
+
+	public String getAiringDate() {
+		return airingDate;
+	}
+
+	public void setAiringDate(String airingDate) {
+		this.airingDate = airingDate;
+	}
+
+	public String getAiringTime() {
+		return airingTime;
+	}
+
+	public void setAiringTime(String airingTime) {
+		this.airingTime = airingTime;
+	}
+
+	public int getMovieNumber() {
+		return movieNumber;
+	}
+
+	public void setMovieNumber(int movieNumber) {
+		this.movieNumber = movieNumber;
+	}
+
+	public int getTheater() {
+		return theater;
+	}
+
+	public void setTheater(int theater) {
+		this.theater = theater;
+	}
+
+	public int getSeat() {
+		return Seat;
+	}
+
+	public void setSeat(int seat) {
+		Seat = seat;
+	}
+	
+
+	
+
+	
 	
 	
 	// 제목

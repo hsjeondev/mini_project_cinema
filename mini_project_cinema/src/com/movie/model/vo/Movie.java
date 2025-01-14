@@ -1,5 +1,9 @@
 package com.movie.model.vo;
 
-public class Movie {
+import java.sql.Date;
+import java.time.LocalDate;
+import java.time.LocalTime;
 
-}
+public class Movie {
+	
+} 

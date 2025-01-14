@@ -5,7 +5,7 @@ import java.util.Scanner;
 
 import com.movie.controller.ScreeningController;
 import com.movie.controller.UserController;
-import com.movie.model.vo.Screening;
+import com.movie.model.vo.Movie;
 import com.movie.model.vo.User;
 
 public class Menu {
@@ -93,7 +93,7 @@ public class Menu {
   //나
   public void movieRank() {
 	  	System.out.println("=-=상영 정보 확인=-=");
-		List<Screening> list = screening.movieRank();
+		List<Movie> list = screening.movieRank();
 		System.out.print("영화를 선택하시겠습니까? (Y/N) : ");
 		String yesOrNo = sc.next();
 		if("Y".equals(yesOrNo)) {
