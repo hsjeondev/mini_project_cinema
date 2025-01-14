@@ -1,5 +1,14 @@
 package com.movie.controller;
 
-public class UserController {
+import com.movie.model.service.UserService;
 
+public class UserController {
+	private UserService service = new UserService();
+	
+//	private int isDuplicateMember(String id) {
+//		int result = service.isDuplicateMember(id);
+//		return result;
+//	}
+	
+	
 }
