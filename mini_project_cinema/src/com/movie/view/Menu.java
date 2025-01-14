@@ -1,10 +1,12 @@
 package com.movie.view;
 
+import java.util.List;
 import java.util.Scanner;
 
 import com.movie.controller.MovieController;
 import com.movie.controller.ScreeningController;
 import com.movie.controller.UserController;
+import com.movie.model.vo.Screening;
 import com.movie.model.vo.User;
 
 public class Menu {
@@ -27,9 +29,10 @@ public class Menu {
 			switch(menu) {
 				case 1 : signIn();break;
 				case 2 : login(); break;
-				case 3 : break;
+				case 3 : movieRank();break;
 				case 0 : System.out.println("이꿜스 영화관을 이용해주셔서 감사합니다.");return;
 				default : System.out.println("지금 누른 메뉴는 없는 메뉴입니다.");
+
 			}
 		}
 	}
@@ -70,10 +73,25 @@ public class Menu {
 	public void userMenu() {
 
 	}
+
+	
+	/*public void userMenu() {
+		System.out.println("=== 사용자 메뉴 ===");
+		System.out.println("[1] 티켓 예매	[2] 마이페이지");
+		System.out.print("원하시는 메뉴를 선택해주세요 : ");
+		int number = sc.nextInt();
+		switch(number) {
+			case 1:reservation();break;
+			case 2:
+			default:System.out.println("다시 선택해주세요.");return;
+		}
+	}*/
+
 	public void userMenu(String userName) {
 		System.out.println("=== 유저 메뉴 ===");
 		System.out.println(userName + "님 환영합니다!");
 	}
+
 	
 	
 	public void insertMovieOne() {
@@ -118,10 +136,24 @@ public class Menu {
 			System.out.println("아이디 또는 비밀번호가 틀렸습니다.");
 		}
 	}
-  
+  //나
   public void movieRank() {
-
-//		List<Screening> list = screening.movieRank();
+	  	System.out.println("=-=상영 정보 확인=-=");
+		List<Screening> list = screening.movieRank();
+		System.out.print("영화를 선택하시겠습니까? (Y/N) : ");
+		String yesOrNo = sc.next();
+		if("Y".equals(yesOrNo)) {
+			System.out.println("맞음");
+		}else {
+			System.out.println("안녕히 가십시오. 고맙습니다.");
+			return;
+		}
 	}
+  //나
+  /*public void reservation() {
+	  System.out.println("=-=티켓 예매=-=");
+	  List<Screening> list = screening.movieRank();
+	  
+  }*/
 	
 }
