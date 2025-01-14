@@ -1,9 +1,7 @@
 package com.movie.model.vo;
 
-import java.time.LocalDateTime;
-
 public class Movie {
-	
+
 	private int movieNo;
 	private String movieTitle;
 	private int runningTime;
@@ -116,3 +114,4 @@ public class Movie {
 	
 	
 }
+
