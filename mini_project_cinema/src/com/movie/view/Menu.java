@@ -17,8 +17,9 @@ public class Menu {
 			System.out.println("1. 회원가입");
 			System.out.println("2. 로그인");
 			System.out.println("3. 상영정보확인");
-			System.out.println("메뉴 : ");
+			System.out.print("메뉴 : ");
 			int menu = sc.nextInt();
+			sc.nextLine();
 			
 			switch(menu) {
 				case 1 : signIn();break;
@@ -43,8 +44,9 @@ public class Menu {
 	public void managerMenu() {
 		System.out.println("=== 관리자 메뉴 ===");
 	}
-	public void userMenu() {
+	public void userMenu(String userName) {
 		System.out.println("=== 유저 메뉴 ===");
+		System.out.println(userName + "님 환영합니다!");
 	}
 	
 	
@@ -54,15 +56,20 @@ public class Menu {
 		System.out.println("(제목, 러닝타임, 방영시작기간, 방영종료기간, 영화가격)");
 	}
 	public void login() {
+		System.out.println("===== 로그인 =====");
 		System.out.print("아이디 : ");
 		String id = sc.nextLine();
 		System.out.print("비밀번호 : ");
 		String pw = sc.nextLine();
-		User user = null;
-		if("admin".equals(user.getUserId())) {
-			// 관리자 메뉴
+		User user = uc.login(id, pw);
+		if(user != null) {
+			if("admin".equals(user.getUserId())) {
+				managerMenu();
+			} else {
+				userMenu(user.getUserName());
+			}
 		} else {
-			// 사용자 메뉴
+			System.out.println("아이디 또는 비밀번호가 틀렸습니다.");
 		}
 	}
   
