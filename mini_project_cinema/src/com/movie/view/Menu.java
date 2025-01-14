@@ -20,6 +20,8 @@ public class Menu {
 			
 			switch(menu) {
 				case 1 : signIn();break;
+				
+				case 3 : movieRank();break;
 			}
 		}
 	}
@@ -38,8 +40,8 @@ public class Menu {
 	}
   
   public void movieRank() {
-
-//		List<Screening> list = screening.movieRank();
+	  	System.out.println("=-=인기 영화=-=");
+		List<Screening> list = screening.movieRank();
 	}
 	
 }
