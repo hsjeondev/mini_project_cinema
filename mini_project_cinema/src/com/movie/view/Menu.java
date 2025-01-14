@@ -1,13 +1,17 @@
 package com.movie.view;
 
-import java.util.Scanner;
 import java.util.List;
+import java.util.Scanner;
+
 import com.movie.controller.ScreeningController;
+import com.movie.controller.UserController;
 import com.movie.model.vo.Screening;
+import com.movie.model.vo.User;
 
 public class Menu {
 	private Scanner sc = new Scanner(System.in);
-  private ScreeningController screening = new ScreeningController();
+	private ScreeningController screening = new ScreeningController();
+	private UserController uc = new UserController();
 	
 	public void mainMenu(){
 		System.out.println("이꿜스 영화관에 오신걸 환영합니다");
@@ -20,7 +24,11 @@ public class Menu {
 			
 			switch(menu) {
 				case 1 : signIn();break;
+
 				
+
+				case 2 : login(); break;
+
 				case 3 : movieRank();break;
 			}
 		}
@@ -38,10 +46,37 @@ public class Menu {
 		
 	
 	}
+
+	public void managerMenu() {
+		System.out.println("=== 관리자 메뉴 ===");
+	}
+	public void userMenu() {
+		System.out.println("=== 유저 메뉴 ===");
+	}
+	
+	
+	public void insertMovieOne() {
+		System.out.println("*** 영화 추가 ***");
+		System.out.println("새로운 영화를 추가할 정보를 입력해주세요!!");
+		System.out.println("(제목, 러닝타임, 방영시작기간, 방영종료기간, 영화가격)");
+	}
+	public void login() {
+		System.out.print("아이디 : ");
+		String id = sc.nextLine();
+		System.out.print("비밀번호 : ");
+		String pw = sc.nextLine();
+		User user = null;
+		if("admin".equals(user.getUserId())) {
+			// 관리자 메뉴
+		} else {
+			// 사용자 메뉴
+		}
+	}
   
   public void movieRank() {
 	  	System.out.println("=-=인기 영화=-=");
 		List<Screening> list = screening.movieRank();
+		
 	}
 	
 }
