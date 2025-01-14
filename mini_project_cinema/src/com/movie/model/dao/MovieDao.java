@@ -1,10 +1,12 @@
 package com.movie.model.dao;
 
+import static com.movie.template.JDBCTemplate.close;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.SQLException;
 
 import com.movie.model.vo.Movie;
-import static com.movie.template.JDBCTemplate.*;
 
 public class MovieDao {
 	
@@ -23,14 +25,10 @@ public class MovieDao {
 			pstmt.setInt(5, movie.getMoviePrice());
 			
 			result = pstmt.executeUpdate();
-		}catch(Exception e){
-			e.printStackTrace();
+		}catch(SQLException e){
+			result = 0;
 		}finally {
-			try {
-				close(pstmt);
-			}catch(Exception e) {
-				e.printStackTrace();
-			}
+			close(pstmt);
 		}
 		return result;
 	}
