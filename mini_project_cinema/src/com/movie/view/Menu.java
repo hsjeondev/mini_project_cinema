@@ -2,17 +2,18 @@ package com.movie.view;
 
 import java.util.ArrayList;
 import java.util.InputMismatchException;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
 import java.util.Scanner;
+import java.util.Set;
 
-
-import com.movie.controller.ReservationController;
 import com.movie.controller.MovieController;
+import com.movie.controller.ReservationController;
 import com.movie.controller.ScreeningController;
 import com.movie.controller.TheaterController;
 import com.movie.controller.UserController;
-import com.movie.model.vo.Reservation;
-import com.movie.model.vo.Screening;
 import com.movie.model.vo.Movie;
 import com.movie.model.vo.User;
 
@@ -152,19 +153,51 @@ public class Menu {
 	}
 	
 	public void checkReservation(User user) {
-		List<Reservation> list = new ArrayList();
+		List<Map<String, Object>> list = new ArrayList<Map<String, Object>>();
 		list = rc.checkReservation(user.getUserNo());
-		if(list.isEmpty()) {
-			System.out.println("예매 내역이 없습니다.");
-		} else {
-			for(Reservation reservation : list) {
-				System.out.println(reservation);
-			}
-		}
+		printReservation(list, user.getUserName());
 	}
 	
 	public void cancleReservation(User user) {
-		
+		List<Map<String, Object>> list = new ArrayList<Map<String, Object>>();
+		List<Integer> reservationNoList = new ArrayList<Integer>();
+		list = rc.checkReservation(user.getUserNo());
+		reservationNoList = printReservation(list, user.getUserName());
+	}
+	
+	public List<Integer> printReservation(List<Map<String, Object>> list, String UserName) {
+		List<Integer> reservationNoList = new ArrayList<Integer>();
+		if(list.isEmpty() || list == null) {
+			System.out.println("예매 내역이 없습니다.");
+		} else {
+			System.out.println("=====" + UserName + "님의 예매 내역 =====");
+			String movieTitle = "";
+			int theaterNo = 0;
+			String date = "";
+			String time = "";
+			for(Map<String, Object> map : list) {
+				Set<String> ketSet = map.keySet();
+				Iterator<String> itKey = ketSet.iterator();
+				while(itKey.hasNext()) {
+					String key = itKey.next();
+					if(key.equals("title")) {
+						movieTitle = String.valueOf(map.get(key));
+					} else if(key.equals("theaterNo")) {
+						theaterNo = (int)map.get(key);
+					} else if(key.equals("date")) {
+						date = String.valueOf(map.get(key));
+					} else if(key.equals("time")) {
+						time = String.valueOf(map.get(key));
+					} else if(key.equals("reservationNo")) {
+						reservationNoList.add((int)map.get(key));
+					}
+				}
+				System.out.println("영화 제목 : " + movieTitle + ", 상영관 : " 
+						+ theaterNo + "관" + ", 날짜 : " + date + ", 시작 시간 : " + time);
+			}
+			
+		}
+		return reservationNoList;
 	}
 
 	
