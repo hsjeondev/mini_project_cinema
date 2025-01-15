@@ -18,7 +18,7 @@ public class ReservationDao {
 		List<Reservation> list = new ArrayList<Reservation>();
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		
+
 		String sql = "SELECT m.movie_title AS title, t.theater_no AS theaterNo, s.screening_date AS date, s.screening_time AS time "
 				+ " FROM reservation r "
 				+ " JOIN user u "
@@ -30,7 +30,7 @@ public class ReservationDao {
 				+ " JOIN theater t "
 				+ " ON s.theater_no = t.theater_no "
 				+ " WHERE u.user_no = ? ";
-		
+
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, userNo);
@@ -47,12 +47,12 @@ public class ReservationDao {
 				map.put("theaterNo", theaterNo);
 				map.put("date", date);
 				map.put("time", time);
-				
+				System.out.println("gd");
 			}
 		} catch(SQLException e) {
 			list = null;
 		}
-		
+
 		return list;
 	}
 }
