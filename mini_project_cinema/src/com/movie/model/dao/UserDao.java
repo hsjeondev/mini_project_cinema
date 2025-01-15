@@ -94,6 +94,60 @@ public class UserDao {
 		return user;
 	}
 
+	public int isDuplicateNumber(String phone, Connection conn) {
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		int result = 0;
+		
+		try {
+			String sql="SELECT COUNT(*) FROM `user` WHERE user_phone = ? ";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1,phone);
+			rs =pstmt.executeQuery();
+			if(rs.next()) {
+				result = rs.getInt(1);
+			}
+			
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			try {
+				close(rs);
+				close(pstmt);
+			}catch(Exception e) {
+				e.printStackTrace();
+			}
+		}
+		return result;
+	}
+
+	public int updateUserOne(User u, Connection conn) {
+		PreparedStatement pstmt = null;
+		int result =0;
+		
+		try {
+			String sql="UPDATE `user` "
+					+ "SET user_no = ? "
+					+ "WHERE user_no = ? ";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1,u.getUserNo());
+			pstmt.setString(2,u.getUserPw());
+			pstmt.setString(3,u.getUserName());
+			pstmt.setString(4,u.getUserPhone());
+			result = pstmt.executeUpdate();
+
+		} catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			try {
+				pstmt.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return result;
+	}
+
 
 
 }

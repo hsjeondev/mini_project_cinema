@@ -25,4 +25,17 @@ public class UserController {
 		return user;
 	}
 
+	public int isDuplicateNumber(String phone) {
+		int result = us.isDuplicateNumber(phone);
+		return result;
+	}
+
+	public int updateUserOne(String newPw, String name, String phone, int userNo) {
+		User u = new User(newPw,name,phone,userNo);
+		int result = us.updateUserOne(u);
+		return result;
+	}
+
+
+
 }

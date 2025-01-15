@@ -32,4 +32,18 @@ public class UserService {
 		return user;
 	}
 
+	public int isDuplicateNumber(String phone) {
+		Connection conn = getConnection();
+		int result = ud.isDuplicateNumber(phone,conn);
+		close(conn);
+		return result;
+	}
+
+	public int updateUserOne(User u) {
+		Connection conn = getConnection();
+		int result = ud.updateUserOne(u,conn);
+		close(conn);
+		return result;
+	}
+
 }
