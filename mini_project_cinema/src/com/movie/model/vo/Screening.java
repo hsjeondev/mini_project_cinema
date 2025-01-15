@@ -1,19 +1,18 @@
 package com.movie.model.vo;
 
-import java.time.LocalDate;
-import java.time.LocalTime;
-
 public class Screening {
 	private int screeningNumber;
-	private LocalDate airingDate;
-	private LocalTime airingTime;
+	private String airingDate;
+	private String airingTime;
 	private int movieNumber;
 	private int theater;
 	private int Seat;
 	
 	public Screening() {}
 
-	public Screening(int screeningNumber, LocalDate airingDate, LocalTime airingTime, int movieNumber, int theater, int seat) {
+
+	public Screening(int screeningNumber, String airingDate, String airingTime, int movieNumber, int theater,
+			int seat) {
 		this.screeningNumber = screeningNumber;
 		this.airingDate = airingDate;
 		this.airingTime = airingTime;
@@ -30,19 +29,19 @@ public class Screening {
 		this.screeningNumber = screeningNumber;
 	}
 
-	public LocalDate getAiringDate() {
+	public String getAiringDate() {
 		return airingDate;
 	}
 
-	public void setAiringDate(LocalDate airingDate) {
+	public void setAiringDate(String airingDate) {
 		this.airingDate = airingDate;
 	}
 
-	public LocalTime getAiringTime() {
+	public String getAiringTime() {
 		return airingTime;
 	}
 
-	public void setAiringTime(LocalTime airingTime) {
+	public void setAiringTime(String airingTime) {
 		this.airingTime = airingTime;
 	}
 
@@ -69,7 +68,7 @@ public class Screening {
 	public void setSeat(int seat) {
 		Seat = seat;
 	}
-	
+
 	
 	
 	// 제목
