@@ -14,7 +14,6 @@ public class UserService {
 		Connection conn = getConnection();
 		int result = ud.signInMember(u, conn);
 		close(conn);
-		
 		return result;
 	}
 	
