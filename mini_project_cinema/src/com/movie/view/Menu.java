@@ -1,11 +1,18 @@
 package com.movie.view;
 
+import java.util.ArrayList;
+import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
 
+
+import com.movie.controller.ReservationController;
 import com.movie.controller.MovieController;
 import com.movie.controller.ScreeningController;
+import com.movie.controller.TheaterController;
 import com.movie.controller.UserController;
+import com.movie.model.vo.Reservation;
+import com.movie.model.vo.Screening;
 import com.movie.model.vo.Movie;
 import com.movie.model.vo.User;
 
@@ -13,7 +20,9 @@ public class Menu {
 	private Scanner sc = new Scanner(System.in);
 	private ScreeningController screening = new ScreeningController();
 	private UserController uc = new UserController();
+	private ReservationController rc = new ReservationController();
 	private MovieController mc = new MovieController();
+	private TheaterController tc = new TheaterController();
 	
 	public void mainMenu(){
 		System.out.println("이꿜스 영화관에 오신걸 환영합니다");
@@ -63,7 +72,7 @@ public class Menu {
 		sc.nextLine();
 		switch(menu) {
 			case 1 : insertMovieOne();break;
-			case 2 : break;
+			case 2 : insertScreeningOne();break;
 			case 3 : break;
 			case 4 : break;
 			case 0 : System.out.println("이용해주셔서 감사합니다!");return;
@@ -87,9 +96,75 @@ public class Menu {
 		}
 	}*/
 
-	public void userMenu(String userName) {
-		System.out.println("=== 유저 메뉴 ===");
-		System.out.println(userName + "님 환영합니다!");
+	public void userMenu(User user) {
+		System.out.println("===== 유저 메뉴 =====");
+		System.out.println(user.getUserName() + "님 환영합니다!");
+		
+		int select = 0;
+		while(true) {
+			System.out.println("1. 티켓 예매");
+			System.out.println("2. 마이페이지");
+			System.out.println("9. 로그아웃");
+			try {
+				System.out.print("메뉴 번호 선택 : ");
+				select = sc.nextInt();
+				break;
+			} catch(InputMismatchException e) {
+				System.out.println("번호를 입력해주세요.");
+				sc.nextLine();
+				continue;
+			}
+		}
+		
+		switch(select) {
+			case 2 : myPage(user); break;
+			case 9 : System.out.println("다음에 또 오세요."); return;
+		}
+		
+	}
+	
+	public void myPage(User user) {
+		System.out.println("===== 마이페이지 =====");
+		int select = 0;
+		while(true) {
+			System.out.println("1. 회원 정보 수정");
+			System.out.println("2. 회원 탈퇴");
+			System.out.println("3. 금액 충전");
+			System.out.println("4. 예매 내역 조회");
+			System.out.println("5. 예매 취소");
+			try {
+				System.out.print("메뉴 번호 선택 : ");
+				select = sc.nextInt();
+				break;
+			} catch(InputMismatchException e) {
+				System.out.println("번호를 입력해주세요.");
+				sc.nextLine();
+				continue;
+			}
+		}
+		
+		switch(select) {
+			case 4 : checkReservation(user); break;
+			case 5 : cancleReservation(user); break;
+			case 9 : System.out.println("다음에 또 오세요."); return;
+		}
+		
+	}
+	
+	public void checkReservation(User user) {
+		List<Reservation> list = new ArrayList();
+		list = rc.checkReservation(user.getUserNo());
+		if(list.isEmpty()) {
+			System.out.println("예매 내역이 없습니다.");
+		} else {
+			for(Reservation reservation : list) {
+				System.out.println(reservation);
+			}
+		}
+	}
+	
+	public void cancleReservation(User user) {
+		
 	}
 
 	
@@ -112,8 +187,20 @@ public class Menu {
 		sc.nextLine();
 		int result = mc.insertMovieOne(movieTitle, runningTime, startDate, endDate, moviePrice);
 		dmlResultPrint(result,"추가");
-		
 	}
+	public void insertScreeningOne() {
+		System.out.println("*** 상영관 추가 ***");
+		System.out.println("새로운 상영관을 추가할 총 좌석수를 입력해주세요!");
+		System.out.print("상영관 번호 : ");
+		int theaterNo = sc.nextInt();
+		sc.nextLine();
+		System.out.print("총 좌석수 : ");
+		int totalSeats = sc.nextInt();
+		sc.nextLine();
+		int result = tc.insertScreeningOne(theaterNo,totalSeats);
+		dmlResultPrint(result,"추가");
+	}
+	// 추가옵션
 	public void dmlResultPrint(int result, String menuName) {
 		if(result > 0) System.out.println(menuName+"이(가) 정상 수행되었습니다.");
 		else System.out.println(menuName+"중 오류가 발생하였습니다.");
@@ -130,7 +217,7 @@ public class Menu {
 			if("admin".equals(user.getUserId())) {
 				managerMenu();
 			} else {
-				userMenu(user.getUserName());
+				userMenu(user);
 			}
 		} else {
 			System.out.println("아이디 또는 비밀번호가 틀렸습니다.");
