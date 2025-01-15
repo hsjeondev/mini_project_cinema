@@ -73,7 +73,7 @@ public class Menu {
 		switch(menu) {
 			case 1 : insertMovieOne();break;
 			case 2 : insertScreeningOne();break;
-			case 3 : break;
+			case 3 : insertMovieInformation();break;
 			case 4 : break;
 			case 0 : System.out.println("이용해주셔서 감사합니다!");return;
 			default : System.out.println("지금 누른 메뉴는 없는 메뉴입니다.");
@@ -227,6 +227,9 @@ public class Menu {
   public void movieRank() {
 	  	System.out.println("=-=상영 정보 확인=-=");
 		List<Movie> list = screening.movieRank();
+		for(Movie m : list) {
+			System.out.println(m.bestMovie());
+		}
 		System.out.print("영화를 선택하시겠습니까? (Y/N) : ");
 		String yesOrNo = sc.next();
 		if("Y".equals(yesOrNo)) {
@@ -236,6 +239,14 @@ public class Menu {
 			return;
 		}
 	}
+  public void insertMovieInformation() {
+	  System.out.println("=-=상영 정보 추가=-=");
+	  List<Movie> list = screening.movieRank();
+		for(Movie m : list) {
+			System.out.println(m);
+		}
+  }
+  
   //나
   /*public void reservation() {
 	  System.out.println("=-=티켓 예매=-=");

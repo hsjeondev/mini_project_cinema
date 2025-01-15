@@ -8,6 +8,7 @@ public class Screening {
 	private int theater;
 	private int Seat;
 	
+
 	public Screening() {}
 
 
