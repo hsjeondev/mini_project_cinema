@@ -11,8 +11,13 @@ public class TheaterDao {
 		PreparedStatement pstmt = null;
 		int result = 0;
 		try {
-			String sql = "";
+			String sql = "INSERT INTO theater (theater_no,totle_seats) "
+					+ "VALUES(?,?)";  
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, tr.getTheaterNo());
+			pstmt.setInt(2, tr.getTotleSeats());
 			
+			result = pstmt.executeUpdate();
 		}catch(Exception e) {
 			result = 0;
 		}finally {
