@@ -51,7 +51,7 @@ public class Menu {
 		
 	
 	}
-
+	
 	public void managerMenu() {
 		System.out.println("=== 관리자 메뉴 ===");
 		System.out.println(" 관리자 메뉴에 오신걸 환영합니다~!");
@@ -72,30 +72,28 @@ public class Menu {
 			default : System.out.println("지금 누른 메뉴는 없는 메뉴입니다.");
 			}
 		}
-	public void userMenu() {
-
-	}
-
-	
-	/*public void userMenu() {
-		System.out.println("=== 사용자 메뉴 ===");
-		System.out.println("[1] 티켓 예매	[2] 마이페이지");
-		System.out.print("원하시는 메뉴를 선택해주세요 : ");
-		int number = sc.nextInt();
-		switch(number) {
-			case 1:reservation();break;
-			case 2:
-			default:System.out.println("다시 선택해주세요.");return;
-		}
-	}*/
-
-	public void userMenu(String userName) {
-		System.out.println("=== 유저 메뉴 ===");
-		System.out.println(userName + "님 환영합니다!");
-	}
-
+//	public void userMenu(String userName) {
+//		System.out.println("=== 유저 메뉴 ===");
+//		System.out.println(userName + "님 환영합니다!");
+//		System.out.println("1. 티켓 예매");
+//		System.out.println("2. 마이페이지");
+//		System.out.println("3. 로그아웃");
+//		System.out.print("메뉴 : ");
+//		int menu = sc.nextInt();
+//		switch(menu) {
+//			case 1 : break;
+//			case 2 : break;
+//			case 3 : System.out.println("이용해주셔서 감사합니다.");return;
+//			default : System.out.println("지금 누른 메뉴는 없는 메뉴입니다.");break;
+//		}
+//	}
+//	public void myPage() {
+//		System.out.println("=== 마이페이지 ===");
+//		System.out.println("");
+//	}
 	
 	
+	// 영화 추가 (예준)
 	public void insertMovieOne() {
 		System.out.println("*** 영화 추가 ***");
 		System.out.println("새로운 영화를 추가할 정보를 입력해주세요!!");
@@ -115,6 +113,7 @@ public class Menu {
 		int result = mc.insertMovieOne(movieTitle, runningTime, startDate, endDate, moviePrice);
 		dmlResultPrint(result,"추가");
 	}
+	// 상영관 추가(예준)
 	public void insertScreeningOne() {
 		System.out.println("*** 상영관 추가 ***");
 		System.out.println("새로운 상영관을 추가할 총 좌석수를 입력해주세요!");
@@ -127,7 +126,7 @@ public class Menu {
 		int result = tc.insertScreeningOne(theaterNo,totalSeats);
 		dmlResultPrint(result,"추가");
 	}
-	// 추가옵션
+	// 추가옵션 (예준)
 	public void dmlResultPrint(int result, String menuName) {
 		if(result > 0) System.out.println(menuName+"이(가) 정상 수행되었습니다.");
 		else System.out.println(menuName+"중 오류가 발생하였습니다.");
