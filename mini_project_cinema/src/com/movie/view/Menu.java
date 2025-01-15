@@ -5,15 +5,13 @@ import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
 
-
-import com.movie.controller.ReservationController;
 import com.movie.controller.MovieController;
+import com.movie.controller.ReservationController;
 import com.movie.controller.ScreeningController;
 import com.movie.controller.TheaterController;
 import com.movie.controller.UserController;
-import com.movie.model.vo.Reservation;
-import com.movie.model.vo.Screening;
 import com.movie.model.vo.Movie;
+import com.movie.model.vo.Reservation;
 import com.movie.model.vo.User;
 
 public class Menu {
@@ -129,22 +127,13 @@ public class Menu {
 		}
 		
 		switch(select) {
-			case 3 : ChargeAmount();break; 
+			case 3 : ChargeAmount(user);break; 
 			case 4 : checkReservation(user); break;
 			case 5 : cancleReservation(user); break;
 			case 9 : System.out.println("다음에 또 오세요."); return;
 		}
 
 
-	}
-	public void ChargeAmount() {
-		System.out.println("*** 금액충전 ***");
-		System.out.println("충전할 금액을 입력해주세요!");
-		System.out.println("< 한도 100만원 >");
-		System.out.print("충전금액 : ");
-		int amount = sc.nextInt();
-		sc.nextLine();
-		
 	}
 	
 	public void checkReservation(User user) {
@@ -204,6 +193,67 @@ public class Menu {
 		if(result > 0) System.out.println(menuName+"이(가) 정상 수행되었습니다.");
 		else System.out.println(menuName+"중 오류가 발생하였습니다.");
 	}
+//	public void ChargeAmount(User user) {
+//		System.out.println("*** 금액충전 ***");
+//		System.out.println("충전할 금액을 입력해주세요!");
+//		System.out.println("< 한도 100만원 >");
+//		System.out.print("충전금액 : ");
+//		int amount = 0;
+//		amount = sc.nextInt();
+//		sc.nextLine();
+//		int userNo = user.getUserNo();
+//		String userName = user.getUserName();
+//		while(amount > 1000000) {
+//			System.out.println("한도를 초과했습니다.");
+//			System.out.println("다시 입력하시겠습니까( Y/N )");
+//			String yesOrNo = sc.next();
+//			if("Y".equals(yesOrNo)) {
+//				
+//			}else {
+//				System.out.println("안녕히 가세요. 고맙습니다.");return;
+//			}
+//		}
+//		int result = uc.ChargeAmount(amount, userNo);
+//		if(result > 0) {
+//			System.out.println(userName+"님 "+amount+"원 충전되었습니다.");
+//		}else {
+//			System.out.println("금액충전중 문제가 발생하였습니다.");
+//		}
+//		
+//	}
+	public void ChargeAmount(User user) {
+		while(true) {
+		System.out.println("*** 금액충전 ***");
+		System.out.println("충전할 금액을 입력해주세요!");
+		System.out.println("< 한도 100만원 >");
+		System.out.print("충전금액 : ");
+		int amount = 0;
+		amount = sc.nextInt();
+		sc.nextLine();
+		if(amount > 1000000) {
+			System.out.println("한도를 초과했습니다.");
+			System.out.println("다시 입력하시겠습니까( Y/N )");
+			String yesOrNo = sc.next();
+			if("Y".equalsIgnoreCase(yesOrNo)) {
+				ChargeAmount(user);break;
+			}else if("N".equalsIgnoreCase(yesOrNo)){
+				System.out.println("안녕히 가세요. 고맙습니다.");return;
+			}else {
+				System.out.println("잘못 입력하셨습니다.");
+				ChargeAmount(user);break;
+			}
+		}
+		int userNo = user.getUserNo();
+		String userName = user.getUserName();
+		int result = uc.ChargeAmount(amount, userNo);
+		if(result > 0) {
+			System.out.println(userName+"님 "+amount+"원 충전되었습니다.");return;
+		}else {
+			System.out.println("금액충전중 문제가 발생하였습니다.");
+		}    
+	}
+	
+}
 	
 	public void login() {
 		System.out.println("===== 로그인 =====");
