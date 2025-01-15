@@ -15,4 +15,9 @@ public class ReservationController {
 		list = rs.checkReservation(userNo);
 		return list;
 	}
+	
+	public int cancleReservation(int deleteNo) {
+		int result = rs.cancleReservation(deleteNo);
+		return 0;
+	}
 }

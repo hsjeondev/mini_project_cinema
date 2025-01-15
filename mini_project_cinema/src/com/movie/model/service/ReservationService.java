@@ -1,6 +1,6 @@
 package com.movie.model.service;
 
-import static com.movie.template.JDBCTemplate.getConnection;
+import static com.movie.template.JDBCTemplate.*;
 
 import java.sql.Connection;
 import java.util.List;
@@ -15,6 +15,13 @@ public class ReservationService {
 	public List<Map<String, Object>> checkReservation(int userNo) {
 		Connection conn = getConnection();
 		List<Map<String, Object>> list = rd.checkReservation(userNo, conn);
+		close(conn);
 		return list;
+	}
+	
+	public int cancleReservation(int deleteNo) {
+		Connection conn = getConnection();
+		int result = rd.cancleReservation(deleteNo, conn);
+		return result;
 	}
 }

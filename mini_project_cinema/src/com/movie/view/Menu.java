@@ -103,19 +103,6 @@ public class Menu {
 
 	}
 
-	
-	/*public void userMenu() {
-		System.out.println("=== 사용자 메뉴 ===");
-		System.out.println("[1] 티켓 예매	[2] 마이페이지");
-		System.out.print("원하시는 메뉴를 선택해주세요 : ");
-		int number = sc.nextInt();
-		switch(number) {
-			case 1:reservation();break;
-			case 2:
-			default:System.out.println("다시 선택해주세요.");return;
-		}
-	}*/
-
 	public void userMenu(User user) {
 		System.out.println("===== 유저 메뉴 =====");
 		System.out.println(user.getUserName() + "님 환영합니다!");
@@ -182,6 +169,15 @@ public class Menu {
 		List<Integer> reservationNoList = new ArrayList<Integer>();
 		list = rc.checkReservation(user.getUserNo());
 		reservationNoList = printReservation(list, user.getUserName());
+		System.out.println("삭제 할 번호를 입력해주세요.");
+		System.out.print("번호 선택 : ");
+		int select = sc.nextInt();
+		int result = rc.cancleReservation(reservationNoList.get(select-1));
+		if(result > 0) {
+			System.out.println("예매 취소가 정상적으로 이뤄졌습니다.");
+		} else {
+			System.out.println("예매 취소 중 오류가 발생하였습니다. 다시 시도해주세요.");
+		}
 	}
 	
 	public List<Integer> printReservation(List<Map<String, Object>> list, String UserName) {
@@ -194,6 +190,7 @@ public class Menu {
 			int theaterNo = 0;
 			String date = "";
 			String time = "";
+			int i = 1;
 			for(Map<String, Object> map : list) {
 				Set<String> ketSet = map.keySet();
 				Iterator<String> itKey = ketSet.iterator();
@@ -211,8 +208,9 @@ public class Menu {
 						reservationNoList.add((int)map.get(key));
 					}
 				}
-				System.out.println("영화 제목 : " + movieTitle + ", 상영관 : " 
+				System.out.println(i + ". 영화 제목 : " + movieTitle + ", 상영관 : " 
 						+ theaterNo + "관" + ", 날짜 : " + date + ", 시작 시간 : " + time);
+				i++;
 			}
 			
 		}

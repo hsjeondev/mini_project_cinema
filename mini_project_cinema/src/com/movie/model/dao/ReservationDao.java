@@ -10,7 +10,29 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import static com.movie.template.JDBCTemplate.close;
+
 public class ReservationDao {
+	
+	public int cancleReservation(int deleteNo, Connection conn) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		
+		String sql = " DELETE FROM reservation "
+					+ " WHERE reservation_no = ? ";
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, deleteNo);
+			result = pstmt.executeUpdate();
+		}catch(SQLException e) {
+			result = 0;
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
 
 	public List<Map<String, Object>> checkReservation(int userNo, Connection conn) {
 		List<Map<String, Object>> list = new ArrayList<Map<String, Object>>();
@@ -51,6 +73,8 @@ public class ReservationDao {
 			}
 		} catch(SQLException e) {
 			list = null;
+		} finally {
+			close(rs, pstmt);
 		}
 
 		return list;
