@@ -1,6 +1,5 @@
 package com.movie.model.service;
 
-import static com.gn.study.common.JDBCTemplate.close;
 import static com.movie.template.JDBCTemplate.*;
 
 import java.sql.Connection;
