@@ -8,9 +8,8 @@ public class Screening {
 	private int theater;
 	private int Seat;
 	
-	public Screening() {
-		
-	}
+	public Screening() {}
+
 
 	public Screening(int screeningNumber, String airingDate, String airingTime, int movieNumber, int theater,
 			int seat) {
@@ -69,11 +68,7 @@ public class Screening {
 	public void setSeat(int seat) {
 		Seat = seat;
 	}
-	
 
-	
-
-	
 	
 	
 	// 제목
