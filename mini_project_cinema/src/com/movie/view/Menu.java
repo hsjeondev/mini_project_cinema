@@ -5,6 +5,7 @@ import java.util.Scanner;
 
 import com.movie.controller.MovieController;
 import com.movie.controller.ScreeningController;
+import com.movie.controller.TheaterController;
 import com.movie.controller.UserController;
 import com.movie.model.vo.Movie;
 import com.movie.model.vo.User;
@@ -14,6 +15,7 @@ public class Menu {
 	private ScreeningController screening = new ScreeningController();
 	private UserController uc = new UserController();
 	private MovieController mc = new MovieController();
+	private TheaterController tc = new TheaterController();
 	
 	public void mainMenu(){
 		System.out.println("이꿜스 영화관에 오신걸 환영합니다");
@@ -63,7 +65,7 @@ public class Menu {
 		sc.nextLine();
 		switch(menu) {
 			case 1 : insertMovieOne();break;
-			case 2 : break;
+			case 2 : insertScreeningOne();break;
 			case 3 : break;
 			case 4 : break;
 			case 0 : System.out.println("이용해주셔서 감사합니다!");return;
@@ -112,8 +114,20 @@ public class Menu {
 		sc.nextLine();
 		int result = mc.insertMovieOne(movieTitle, runningTime, startDate, endDate, moviePrice);
 		dmlResultPrint(result,"추가");
-		
 	}
+	public void insertScreeningOne() {
+		System.out.println("*** 상영관 추가 ***");
+		System.out.println("새로운 상영관을 추가할 총 좌석수를 입력해주세요!");
+		System.out.print("상영관 번호 : ");
+		int theaterNo = sc.nextInt();
+		sc.nextLine();
+		System.out.print("총 좌석수 : ");
+		int totalSeats = sc.nextInt();
+		sc.nextLine();
+		int result = tc.insertScreeningOne(theaterNo,totalSeats);
+		dmlResultPrint(result,"추가");
+	}
+	// 추가옵션
 	public void dmlResultPrint(int result, String menuName) {
 		if(result > 0) System.out.println(menuName+"이(가) 정상 수행되었습니다.");
 		else System.out.println(menuName+"중 오류가 발생하였습니다.");
