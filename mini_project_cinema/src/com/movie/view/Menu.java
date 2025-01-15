@@ -1,19 +1,17 @@
 package com.movie.view;
 
+import java.util.Scanner;
 import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-import java.util.Map.Entry;
-import java.util.Scanner;
 import java.util.Set;
-
 import com.movie.controller.MovieController;
 import com.movie.controller.ReservationController;
 import com.movie.controller.ScreeningController;
-import com.movie.controller.TheaterController;
 import com.movie.controller.UserController;
+import com.movie.controller.TheaterController;
 import com.movie.model.vo.Movie;
 import com.movie.model.vo.User;
 
@@ -21,9 +19,11 @@ public class Menu {
 	private Scanner sc = new Scanner(System.in);
 	private ScreeningController screening = new ScreeningController();
 	private UserController uc = new UserController();
+
 	private ReservationController rc = new ReservationController();
 	private MovieController mc = new MovieController();
 	private TheaterController tc = new TheaterController();
+
 	
 	public void mainMenu(){
 		System.out.println("이꿜스 영화관에 오신걸 환영합니다");
@@ -52,10 +52,29 @@ public class Menu {
 		String id = sc.nextLine();
 		System.out.println("비밀번호 입력 : ");
 		String pw = sc.nextLine();
+		String checkPw ="";
+		while(!pw.equals(checkPw)) {
+			System.out.println("비밀번호 재확인 : ");
+			checkPw = sc.nextLine();
+		}
 		System.out.println("이름 입력 : ");
 		String name = sc.nextLine();
 		System.out.println("전화번호 입력 : ");
-		int phone = sc.nextInt();
+		String phone = sc.nextLine();
+		
+		int cnt = uc.isDuplicateMember(id);
+		if(cnt > 0) {
+			System.out.println("이미 존재하는 아이디입니다.");
+		} else {
+			System.out.println("사용가능한 아이디입니다.");
+			System.out.println("회원가입 진행중~");
+			int result = uc.signInMember(id,pw,name,phone);
+			if(result >0) {
+				System.out.println("성공적으로 회원가입이 완료되었습니다.");
+			} else {
+				System.out.println("회원가입중 오류가 발생하였습니다.");
+			}
+		}
 		
 	
 	}
