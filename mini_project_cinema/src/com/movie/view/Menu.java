@@ -78,7 +78,7 @@ public class Menu {
 		
 	
 	}
-
+	
 	public void managerMenu() {
 		System.out.println("=== 관리자 메뉴 ===");
 		System.out.println(" 관리자 메뉴에 오신걸 환영합니다~!");
@@ -99,9 +99,10 @@ public class Menu {
 			default : System.out.println("지금 누른 메뉴는 없는 메뉴입니다.");
 			}
 		}
-	public void userMenu() {
 
-	}
+
+	
+
 
 	public void userMenu(User user) {
 		System.out.println("===== 유저 메뉴 =====");
@@ -151,11 +152,13 @@ public class Menu {
 		}
 		
 		switch(select) {
+			case 3 : ChargeAmount(user);break; 
 			case 4 : checkReservation(user); break;
 			case 5 : cancleReservation(user); break;
 			case 9 : System.out.println("다음에 또 오세요."); return;
 		}
-		
+
+
 	}
 	
 	public void checkReservation(User user) {
@@ -217,8 +220,10 @@ public class Menu {
 		return reservationNoList;
 	}
 
+
 	
 	
+	// 영화 추가 (예준)
 	public void insertMovieOne() {
 		System.out.println("*** 영화 추가 ***");
 		System.out.println("새로운 영화를 추가할 정보를 입력해주세요!!");
@@ -238,6 +243,7 @@ public class Menu {
 		int result = mc.insertMovieOne(movieTitle, runningTime, startDate, endDate, moviePrice);
 		dmlResultPrint(result,"추가");
 	}
+	// 상영관 추가(예준)
 	public void insertScreeningOne() {
 		System.out.println("*** 상영관 추가 ***");
 		System.out.println("새로운 상영관을 추가할 총 좌석수를 입력해주세요!");
@@ -250,11 +256,45 @@ public class Menu {
 		int result = tc.insertScreeningOne(theaterNo,totalSeats);
 		dmlResultPrint(result,"추가");
 	}
-	// 추가옵션
+	// 추가옵션 (예준)
 	public void dmlResultPrint(int result, String menuName) {
 		if(result > 0) System.out.println(menuName+"이(가) 정상 수행되었습니다.");
 		else System.out.println(menuName+"중 오류가 발생하였습니다.");
 	}
+
+	public void ChargeAmount(User user) {
+		while(true) {
+		System.out.println("*** 금액충전 ***");
+		System.out.println("충전할 금액을 입력해주세요!");
+		System.out.println("< 한도 100만원 >");
+		System.out.print("충전금액 : ");
+		int amount = 0;
+		amount = sc.nextInt();
+		sc.nextLine();
+		if(amount > 1000000) {
+			System.out.println("한도를 초과했습니다.");
+			System.out.println("다시 입력하시겠습니까( Y/N )");
+			String yesOrNo = sc.next();
+			if("Y".equalsIgnoreCase(yesOrNo)) {
+				ChargeAmount(user);break;
+			}else if("N".equalsIgnoreCase(yesOrNo)){
+				System.out.println("안녕히 가세요. 고맙습니다.");return;
+			}else {
+				System.out.println("잘못 입력하셨습니다.");
+				ChargeAmount(user);break;
+			}
+		}
+		int userNo = user.getUserNo();
+		String userName = user.getUserName();
+		int result = uc.ChargeAmount(amount, userNo);
+		if(result > 0) {
+			System.out.println(userName+"님 "+amount+"원 충전되었습니다.");return;
+		}else {
+			System.out.println("금액충전중 문제가 발생하였습니다.");
+		}    
+	}
+	
+}
 	
 	public void login() {
 		System.out.println("===== 로그인 =====");

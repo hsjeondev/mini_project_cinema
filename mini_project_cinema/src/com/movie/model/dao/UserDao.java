@@ -1,10 +1,15 @@
 package com.movie.model.dao;
 
+
+
+
 import java.sql.Connection;
 import java.sql.ResultSet;
 import static com.movie.template.JDBCTemplate.close;
+import java.sql.*;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+
 import java.time.LocalDateTime;
 import com.movie.model.vo.User;
 
@@ -93,6 +98,24 @@ public class UserDao {
 		return user;
 	}
 
-
-
+	public int ChargeAmount(int amount, int userNo, Connection conn) {
+		
+		PreparedStatement pstmt = null;
+		int result = 0;
+		try {
+			String sql = "UPDATE user SET chargeamount = (chargeamount + ?) "
+						+ "WHERE user_no = ? ";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, amount);
+			pstmt.setInt(2, userNo);
+			
+			result = pstmt.executeUpdate();
+		}catch(SQLException e) {
+			result = 0;
+		}finally {
+			close(pstmt);
+		}
+		return result;
+	}
+	
 }

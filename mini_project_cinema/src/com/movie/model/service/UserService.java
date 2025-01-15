@@ -1,6 +1,7 @@
 package com.movie.model.service;
 
-import static com.movie.template.JDBCTemplate.*;
+import static com.movie.template.JDBCTemplate.close;
+import static com.movie.template.JDBCTemplate.getConnection;
 
 import java.sql.Connection;
 
@@ -30,6 +31,14 @@ public class UserService {
 		close(conn);
 		
 		return user;
+	}
+
+	public int ChargeAmount(int amount, int userNo) {
+		Connection conn = getConnection();
+		UserDao ud = new UserDao();
+		int result = ud.ChargeAmount(amount,userNo,conn);
+		close(conn);
+		return result;
 	}
 
 }

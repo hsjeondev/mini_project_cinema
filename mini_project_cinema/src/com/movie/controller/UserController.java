@@ -25,4 +25,13 @@ public class UserController {
 		return user;
 	}
 
+	public int ChargeAmount(int amount, int userNo) {
+
+		UserService uv = new UserService();
+		int result = uv.ChargeAmount(amount,userNo);
+		return result;
+	}
+
+
+
 }

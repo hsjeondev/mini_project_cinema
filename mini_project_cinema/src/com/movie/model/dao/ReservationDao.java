@@ -25,6 +25,7 @@ public class ReservationDao {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, deleteNo);
 			result = pstmt.executeUpdate();
+			System.out.println(result);
 		}catch(SQLException e) {
 			result = 0;
 		} finally {
