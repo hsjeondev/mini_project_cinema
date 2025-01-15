@@ -12,7 +12,11 @@ public class Movie {
 	
 	
 	public Movie() {}
-
+	public Movie(int movieNo,String movieTitle) {
+		this.movieNo=movieNo;
+		this.movieTitle=movieTitle;
+	}
+	
 	public Movie(String movieTitle,int runningTime,String startDate,String endDate,int moviePrice) {
 		this.movieTitle = movieTitle;
 		this.runningTime = runningTime;
@@ -111,6 +115,11 @@ public class Movie {
 				+ ", 방영기간(시작) = " + startDate + ", 방영기간(끝) = " + endDate + ", 영화조회수 = " + movieViews + ", 영화가격 = "
 				+ moviePrice + "]";
 	}
+	
+	public String bestMovie() {
+		return "[영화번호 =" + movieNo +", 영화 제목 = "+ movieTitle + "]";
+	}
+	
 	
 	
 }

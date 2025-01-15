@@ -1,26 +1,27 @@
 package com.movie.view;
 
+import java.util.Scanner;
 import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.List;
-import java.util.Scanner;
-
-import com.movie.controller.MovieController;
 import com.movie.controller.ReservationController;
+import com.movie.controller.MovieController;
 import com.movie.controller.ScreeningController;
-import com.movie.controller.TheaterController;
 import com.movie.controller.UserController;
-import com.movie.model.vo.Movie;
+import com.movie.controller.TheaterController;
 import com.movie.model.vo.Reservation;
+import com.movie.model.vo.Movie;
 import com.movie.model.vo.User;
 
 public class Menu {
 	private Scanner sc = new Scanner(System.in);
 	private ScreeningController screening = new ScreeningController();
 	private UserController uc = new UserController();
+
 	private ReservationController rc = new ReservationController();
 	private MovieController mc = new MovieController();
 	private TheaterController tc = new TheaterController();
+
 	
 	public void mainMenu(){
 		System.out.println("이꿜스 영화관에 오신걸 환영합니다");
@@ -49,10 +50,29 @@ public class Menu {
 		String id = sc.nextLine();
 		System.out.println("비밀번호 입력 : ");
 		String pw = sc.nextLine();
+		String checkPw ="";
+		while(!pw.equals(checkPw)) {
+			System.out.println("비밀번호 재확인 : ");
+			checkPw = sc.nextLine();
+		}
 		System.out.println("이름 입력 : ");
 		String name = sc.nextLine();
 		System.out.println("전화번호 입력 : ");
-		int phone = sc.nextInt();
+		String phone = sc.nextLine();
+		
+		int cnt = uc.isDuplicateMember(id);
+		if(cnt > 0) {
+			System.out.println("이미 존재하는 아이디입니다.");
+		} else {
+			System.out.println("사용가능한 아이디입니다.");
+			System.out.println("회원가입 진행중~");
+			int result = uc.signInMember(id,pw,name,phone);
+			if(result >0) {
+				System.out.println("성공적으로 회원가입이 완료되었습니다.");
+			} else {
+				System.out.println("회원가입중 오류가 발생하였습니다.");
+			}
+		}
 		
 	
 	}
@@ -71,7 +91,7 @@ public class Menu {
 		switch(menu) {
 			case 1 : insertMovieOne();break;
 			case 2 : insertScreeningOne();break;
-			case 3 : break;
+			case 3 : insertMovieInformation();break;
 			case 4 : break;
 			case 0 : System.out.println("이용해주셔서 감사합니다!");return;
 			default : System.out.println("지금 누른 메뉴는 없는 메뉴입니다.");
@@ -193,34 +213,7 @@ public class Menu {
 		if(result > 0) System.out.println(menuName+"이(가) 정상 수행되었습니다.");
 		else System.out.println(menuName+"중 오류가 발생하였습니다.");
 	}
-//	public void ChargeAmount(User user) {
-//		System.out.println("*** 금액충전 ***");
-//		System.out.println("충전할 금액을 입력해주세요!");
-//		System.out.println("< 한도 100만원 >");
-//		System.out.print("충전금액 : ");
-//		int amount = 0;
-//		amount = sc.nextInt();
-//		sc.nextLine();
-//		int userNo = user.getUserNo();
-//		String userName = user.getUserName();
-//		while(amount > 1000000) {
-//			System.out.println("한도를 초과했습니다.");
-//			System.out.println("다시 입력하시겠습니까( Y/N )");
-//			String yesOrNo = sc.next();
-//			if("Y".equals(yesOrNo)) {
-//				
-//			}else {
-//				System.out.println("안녕히 가세요. 고맙습니다.");return;
-//			}
-//		}
-//		int result = uc.ChargeAmount(amount, userNo);
-//		if(result > 0) {
-//			System.out.println(userName+"님 "+amount+"원 충전되었습니다.");
-//		}else {
-//			System.out.println("금액충전중 문제가 발생하였습니다.");
-//		}
-//		
-//	}
+
 	public void ChargeAmount(User user) {
 		while(true) {
 		System.out.println("*** 금액충전 ***");
@@ -276,6 +269,9 @@ public class Menu {
   public void movieRank() {
 	  	System.out.println("=-=상영 정보 확인=-=");
 		List<Movie> list = screening.movieRank();
+		for(Movie m : list) {
+			System.out.println(m.bestMovie());
+		}
 		System.out.print("영화를 선택하시겠습니까? (Y/N) : ");
 		String yesOrNo = sc.next();
 		if("Y".equals(yesOrNo)) {
@@ -285,6 +281,14 @@ public class Menu {
 			return;
 		}
 	}
+  public void insertMovieInformation() {
+	  System.out.println("=-=상영 정보 추가=-=");
+	  List<Movie> list = screening.movieRank();
+		for(Movie m : list) {
+			System.out.println(m);
+		}
+  }
+  
   //나
   /*public void reservation() {
 	  System.out.println("=-=티켓 예매=-=");
