@@ -25,10 +25,20 @@ public class UserController {
 		return user;
 	}
 
-	public int ChargeAmount(int amount, int userNo) {
+//	public int ChargeAmount(int amount, int userNo) {
+//
+//		UserService uv = new UserService();
+//		int result = uv.ChargeAmount(amount,userNo);
+//	}
 
-		UserService uv = new UserService();
-		int result = uv.ChargeAmount(amount,userNo);
+	public int isDuplicateNumber(User user, String phone) {
+		int result = us.isDuplicateNumber(user,phone);
+		return result;
+	}
+
+	public int updateUserOne(String newPw, String name, String phone, int userNo) {
+		User u = new User(newPw,name,phone,userNo);
+		int result = us.updateUserOne(u);
 		return result;
 	}
 

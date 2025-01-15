@@ -147,6 +147,7 @@ public class Menu {
 		}
 		
 		switch(select) {
+			case 1 : updateUserOne(user); break;
 			case 3 : ChargeAmount(user);break; 
 			case 4 : checkReservation(user); break;
 			case 5 : cancleReservation(user); break;
@@ -154,6 +155,38 @@ public class Menu {
 		}
 
 
+	}
+	
+	public void updateUserOne(User user) {
+		System.out.println("=== 회원 정보 수정 ===");
+		System.out.println("개인정보를 수정하시려면 비밀번호를 다시 입력하세요");
+		System.out.println("비밀번호 : ");
+		String pw = sc.nextLine();
+		sc.nextLine();
+		
+		int cnt = uc.isDuplicateNumber(user,pw);
+		if(cnt > 0) {
+			System.out.println(user+"님 새로운 이름을 입력해주세요.");
+			System.out.println("이름 : ");
+			String name = sc.nextLine();
+			System.out.println(user+"님 새로운 비민번호를 입력해주세요.");
+			System.out.println("비밀번호 : ");
+			String newPw = sc.nextLine();
+			System.out.println(user+"님 새로운 전화번호를 입력해주세요.");
+			System.out.println("전화번호 : ");
+			String phone = sc.nextLine();
+			
+			int result = uc.updateUserOne(newPw,name,phone,user.getUserNo());
+			if(result > 0) {
+				System.out.println("성공적으로 수정되었습니다.");
+			}else {
+				System.out.println("수정중 오류가 발생하였습니다.");
+			}
+		} else {
+			System.out.println("잘못된 비밀번호입니다.");
+		}
+		
+		
 	}
 	
 	public void checkReservation(User user) {
