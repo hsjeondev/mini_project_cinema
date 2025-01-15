@@ -10,7 +10,13 @@ public class Screening {
 	
 
 	public Screening() {}
-
+	
+	public Screening(int movieNumber,int theater,String airingDate,String airingTime) {
+		this.movieNumber = movieNumber;
+		this.theater = theater;
+		this.airingDate = airingDate;
+		this.airingTime = airingTime;
+	}
 
 	public Screening(int screeningNumber, String airingDate, String airingTime, int movieNumber, int theater,
 			int seat) {

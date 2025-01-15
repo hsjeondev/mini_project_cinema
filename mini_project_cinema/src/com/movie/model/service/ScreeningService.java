@@ -7,7 +7,9 @@ import java.sql.Connection;
 import java.util.List;
 
 import com.movie.model.dao.ScreeningDao;
+import com.movie.model.dao.TheaterDao;
 import com.movie.model.vo.Movie;
+import com.movie.model.vo.Screening;
 
 public class ScreeningService {
 	private ScreeningDao screening=new ScreeningDao();
@@ -18,5 +20,15 @@ public class ScreeningService {
 		close(coon);
 		return list;
 	}
+	
+	public int insertMovieInformation(Screening sn) {
+		System.out.println(sn.getMovieNumber());
+		System.out.println(sn.getScreeningNumber());
+		Connection conn = getConnection();
+		int result = screening.insertMovieInformation(conn,sn);
+		close(conn);
+		return result;
+		
 
+	}
 }

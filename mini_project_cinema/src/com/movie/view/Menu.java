@@ -5,15 +5,14 @@ import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
 
-
-import com.movie.controller.ReservationController;
 import com.movie.controller.MovieController;
+import com.movie.controller.ReservationController;
 import com.movie.controller.ScreeningController;
 import com.movie.controller.TheaterController;
 import com.movie.controller.UserController;
-import com.movie.model.vo.Reservation;
-import com.movie.model.vo.Screening;
 import com.movie.model.vo.Movie;
+import com.movie.model.vo.Reservation;
+import com.movie.model.vo.Theater;
 import com.movie.model.vo.User;
 
 public class Menu {
@@ -83,18 +82,6 @@ public class Menu {
 
 	}
 
-	
-	/*public void userMenu() {
-		System.out.println("=== 사용자 메뉴 ===");
-		System.out.println("[1] 티켓 예매	[2] 마이페이지");
-		System.out.print("원하시는 메뉴를 선택해주세요 : ");
-		int number = sc.nextInt();
-		switch(number) {
-			case 1:reservation();break;
-			case 2:
-			default:System.out.println("다시 선택해주세요.");return;
-		}
-	}*/
 
 	public void userMenu(User user) {
 		System.out.println("===== 유저 메뉴 =====");
@@ -242,11 +229,34 @@ public class Menu {
   public void insertMovieInformation() {
 	  System.out.println("=-=상영 정보 추가=-=");
 	  List<Movie> list = screening.movieRank();
+	  System.out.println("-----------영화 정보------------");
+		for(Movie m : list) {
+			System.out.println(m);
+		}
+	  List<Theater> list2 = tc.insertMovieInformation();
+	  System.out.println("--------상영관 정보----------");
+	  	for(Theater t : list2) {
+	  		System.out.println(t);
+	  	}
+		System.out.print("영화 번호 입력 :");
+		int movieNumber = sc.nextInt();
+		System.out.print("상영관 번호 입력 : ");
+		int theaterNumber = sc.nextInt();
+		System.out.print("방영 날짜 : ");
+		String startDate=sc.next();
+		System.out.print("방영 시간");
+		String runningTime=sc.next();
+		int result = screening.insertMovieInformation(movieNumber, theaterNumber,startDate,runningTime);
+		dmlResultPrint(result,"상영관 추가");
+  }
+  
+  public void selectMovieList() {
+	  List<Movie> list = screening.movieRank();
+	  System.out.println("-----------영화 정보------------");
 		for(Movie m : list) {
 			System.out.println(m);
 		}
   }
-  
   //나
   /*public void reservation() {
 	  System.out.println("=-=티켓 예매=-=");

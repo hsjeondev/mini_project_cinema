@@ -17,12 +17,11 @@ public class ScreeningDao {
 		ResultSet rs = null;
 		List<Movie> list = new ArrayList<Movie>();
 		try {
-			String sql = "SELECT m.movie_title, "
-					+ "m.movie_no, "
-					+ "    RANK() OVER (ORDER BY m.movie_views DESC) AS rank "
+			String sql = "SELECT * "
 					+ "FROM screening sc "
-					+ "RIGHT JOIN movie m "
-					+ "ON sc.movie_no=m.movie_no ;";
+					+ "JOIN movie m "
+					+ "ON sc.movie_no=m.movie_no "
+					+ "ORDER BY m.movie_views DESC";
 			pstmt = conn.prepareStatement(sql);
 			rs = pstmt.executeQuery();
 			
@@ -49,4 +48,25 @@ public class ScreeningDao {
 		}
 		return list;
 	}
+	
+	public int insertMovieInformation(Connection conn,Screening sn) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		try {
+			String sql = "INSERT INTO screening (movie_no,theater_no,screening_date,screening_time) "
+					+ "VALUES(?,?,STR_TO_DATE(?,'%Y-%m-%d'),STR_TO_DATE(?,'%H:%i:%s'))	";  
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, sn.getMovieNumber());
+			pstmt.setInt(2, sn.getTheater());
+			pstmt.setString(3, sn.getAiringDate());
+			pstmt.setString(4, sn.getAiringTime());
+			result = pstmt.executeUpdate();
+		}catch(Exception e) {
+			result = 0;
+		}finally {
+			close(pstmt);
+		}
+		return result;
+	}
+	
 }
