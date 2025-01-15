@@ -18,6 +18,6 @@ public class ReservationController {
 	
 	public int cancleReservation(int deleteNo) {
 		int result = rs.cancleReservation(deleteNo);
-		return 0;
+		return result;
 	}
 }
