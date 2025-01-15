@@ -12,6 +12,13 @@ public class User {
 	private int chargeamount;
 	
 	public User() {}
+	
+	public User(String userId, String userPw, String userName, String userPhone) {
+		this.userId = userId;
+		this.userPw = userPw;
+		this.userName = userName;
+		this.userPhone = userPhone;
+	}
 
 	public User(int userNo, String userId, String userPw, String userName, String userPhone, LocalDateTime regDate,
 			int chargeamount) {
