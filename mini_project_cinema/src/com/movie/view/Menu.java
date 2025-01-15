@@ -143,7 +143,14 @@ public class Menu {
 			try {
 				System.out.print("메뉴 번호 선택 : ");
 				select = sc.nextInt();
-				break;
+				
+				switch(select) {
+				case 3 : ChargeAmount(user);break; 
+				case 4 : checkReservation(user); break;
+				case 5 : cancleReservation(user); break;
+				case 9 : System.out.println("다음에 또 오세요."); return;
+				}
+				
 			} catch(InputMismatchException e) {
 				System.out.println("번호를 입력해주세요.");
 				sc.nextLine();
@@ -151,12 +158,7 @@ public class Menu {
 			}
 		}
 		
-		switch(select) {
-			case 3 : ChargeAmount(user);break; 
-			case 4 : checkReservation(user); break;
-			case 5 : cancleReservation(user); break;
-			case 9 : System.out.println("다음에 또 오세요."); return;
-		}
+		
 
 
 	}
