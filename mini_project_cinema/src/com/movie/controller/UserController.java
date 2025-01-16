@@ -25,14 +25,14 @@ public class UserController {
 		return user;
 	}
 
-//	public int ChargeAmount(int amount, int userNo) {
-//
-//		UserService uv = new UserService();
-//		int result = uv.ChargeAmount(amount,userNo);
-//	}
+	public int ChargeAmount(int amount, int userNo) {
+		UserService uv = new UserService();
+		int result = uv.ChargeAmount(amount,userNo);
+		return result;
+	}
 
-	public int isDuplicateNumber(User user, String phone) {
-		int result = us.isDuplicateNumber(user,phone);
+	public int isDuplicateNumber(String phone) {
+		int result = us.isDuplicateNumber(phone);
 		return result;
 	}
 
@@ -41,7 +41,6 @@ public class UserController {
 		int result = us.updateUserOne(u);
 		return result;
 	}
-
 
 
 }

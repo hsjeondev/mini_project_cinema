@@ -1,6 +1,10 @@
 package com.movie.model.dao;
 
 
+
+
+import java.sql.Connection;
+import java.sql.ResultSet;
 import static com.movie.template.JDBCTemplate.close;
 import java.sql.*;
 import java.sql.PreparedStatement;
@@ -114,7 +118,7 @@ public class UserDao {
 		return result;
 	}
 	
-	public int isDuplicateNumber(User user, String phone, Connection conn) {
+	public int isDuplicateNumber(String phone, Connection conn) {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		int result = 0;
@@ -140,7 +144,7 @@ public class UserDao {
 		}
 		return result;
 	}
-
+	
 	public int updateUserOne(User u, Connection conn) {
 		PreparedStatement pstmt = null;
 		int result =0;
@@ -150,10 +154,10 @@ public class UserDao {
 					+ "SET user_pw = ? ,user_name = ? , user_phone = ? " 
 					+ "WHERE user_no = ? ";
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setInt(1,u.getUserNo());
-			pstmt.setString(2,u.getUserPw());
-			pstmt.setString(3,u.getUserName());
-			pstmt.setString(4,u.getUserPhone());
+			pstmt.setString(1,u.getUserPw());
+			pstmt.setString(2,u.getUserName());
+			pstmt.setString(3,u.getUserPhone());
+			pstmt.setInt(4,u.getUserNo());
 			result = pstmt.executeUpdate();
 
 		} catch(Exception e) {

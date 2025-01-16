@@ -33,15 +33,17 @@ public class UserService {
 		return user;
 	}
 
-//	public int ChargeAmount(int amount, int userNo) {
-//		Connection conn = getConnection();
-//		UserDao ud = new UserDao();
-//		int result = ud.ChargeAmount(amount,userNo,conn);
-//	}
-
-	public int isDuplicateNumber(User user, String phone) {
+	public int ChargeAmount(int amount, int userNo) {
 		Connection conn = getConnection();
-		int result = ud.isDuplicateNumber(user,phone,conn);
+		UserDao ud = new UserDao();
+		int result = ud.ChargeAmount(amount,userNo,conn);
+		close(conn);
+		return result;
+	}
+
+	public int isDuplicateNumber(String phone) {
+		Connection conn = getConnection();
+		int result = ud.isDuplicateNumber(phone,conn);
 		close(conn);
 		return result;
 	}
