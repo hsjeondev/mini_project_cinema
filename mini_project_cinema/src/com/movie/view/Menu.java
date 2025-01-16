@@ -145,8 +145,10 @@ public class Menu {
 			try {
 				System.out.print("메뉴 번호 선택 : ");
 				select = sc.nextInt();
+				sc.nextLine();
 				
 				switch(select) {
+				case 1 : updateUserOne(user); break;
 				case 3 : ChargeAmount(user);break; 
 				case 4 : checkReservation(user); break;
 				case 5 : cancleReservation(user); break;
@@ -159,12 +161,51 @@ public class Menu {
 				continue;
 			}
 		}
-		
-		
-
 
 	}
-	
+
+	public void updateUserOne(User user) {
+		System.out.println("=== 회원 정보 수정 ===");
+		System.out.println("개인정보를 수정하시려면 비밀번호를 다시 입력하세요");
+		System.out.print("비밀번호 : ");
+		String pw = sc.nextLine();
+		// (1~2번 메뉴에서만 처리)
+		//1. 입력한 비밀번호가 user.getUserPw()와 일치하는 확인
+		//2. 일치하면 이름, 비밀번호, 전화번호 입력 받기
+		// (3~5번 DAO까지 연결)
+		//3. 받은 값을 다 보내기
+		//4. 전화번호가 유니크키 이미 사용중인 전화번호면 넘어오는 결과값이 0
+		//5. 사용 중이지 않은 전화번호면 1 끝.
+		System.out.println("입력받은 비밀번호 : " + pw);
+		System.out.println("user에 들어있는 비밀번호 : " + user.getUserPw());
+		if(user.getUserPw().equals(pw)) {
+			System.out.println("새로운 이름을 입력해주세요.");
+			System.out.println("이름 : ");
+			String name = sc.nextLine();
+			System.out.println("새로운 비민번호를 입력해주세요.");
+			System.out.println("비밀번호 : ");
+			String newPw = sc.nextLine();
+			System.out.println("새로운 전화번호를 입력해주세요.");
+			System.out.println("전화번호 : ");
+			String phone = sc.nextLine();
+
+			int cnt = uc.isDuplicateNumber(phone);
+			if(cnt >0) {
+				System.out.println("이미 사용중인 번호입니다.");
+			}else {
+				System.out.println("수정 가능한 번호입니다.");
+				int result = uc.updateUserOne(newPw,name,phone,user.getUserNo());
+				if(result > 0) {
+					System.out.println("성공적으로 수정되었습니다.");
+				}else {
+					System.out.println("수정중 오류가 발생하였습니다.");
+				}
+			}
+		}else {
+			System.out.println("비밀번호가 일치하지 않습니다.");
+		}
+	}
+
 	public void checkReservation(User user) {
 		List<Map<String, Object>> list = new ArrayList<Map<String, Object>>();
 		list = rc.checkReservation(user.getUserNo());
@@ -288,14 +329,14 @@ public class Menu {
 				ChargeAmount(user);break;
 			}
 		}
-		int userNo = user.getUserNo();
-		String userName = user.getUserName();
-		int result = uc.ChargeAmount(amount, userNo);
-		if(result > 0) {
-			System.out.println(userName+"님 "+amount+"원 충전되었습니다.");return;
-		}else {
-			System.out.println("금액충전중 문제가 발생하였습니다.");
-		}    
+//		int userNo = user.getUserNo();
+//		String userName = user.getUserName();
+//		int result = uc.ChargeAmount(amount, userNo);
+//		if(result > 0) {
+//			System.out.println(userName+"님 "+amount+"원 충전되었습니다.");return;
+//		}else {
+//			System.out.println("금액충전중 문제가 발생하였습니다.");
+//		}    
 	}
 	
 }
@@ -363,12 +404,8 @@ public class Menu {
 
   public void ticketReservation() {
 	  System.out.println("=-=티켓 예매=-=");
-//	  	List<Movie> list = screening.movieRank();
-//		for(Movie m : list) {
-//			System.out.println(m.bestMovie());
-//		}
-//		System.out.print("원하시는 영화의 번호를 선택해주세요 :");
-//		int movieNum = sc.nextInt();
+
+
 		List<Screening> list2 = screening.ticketReservation();
 		for(Screening s : list2) {
 			System.out.println(s.allfull());
@@ -381,4 +418,7 @@ public class Menu {
 		
   }
 	
+	  
+
+
 }

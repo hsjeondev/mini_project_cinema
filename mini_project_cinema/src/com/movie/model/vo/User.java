@@ -13,10 +13,16 @@ public class User {
 	
 	public User() {}
 	
-
 	public User(int chargeamount, int userNo) {
 		this.chargeamount = chargeamount;
 		this.userNo = userNo;
+	}
+
+	public User(String userPw, String userName, String userPhone, int UserNo) {
+		this.userPw = userPw;
+		this.userName = userName;
+		this.userPhone = userPhone;
+		this.userNo = UserNo;
 	}
 	
 	public User(String userId, String userPw, String userName, String userPhone) {
