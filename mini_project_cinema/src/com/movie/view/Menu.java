@@ -362,11 +362,23 @@ public class Menu {
   }
 
   public void ticketReservation() {
-	  
-	  	List<Movie> list = screening.movieRank();
-		for(Movie m : list) {
-			System.out.println(m.bestMovie());
+	  System.out.println("=-=티켓 예매=-=");
+//	  	List<Movie> list = screening.movieRank();
+//		for(Movie m : list) {
+//			System.out.println(m.bestMovie());
+//		}
+//		System.out.print("원하시는 영화의 번호를 선택해주세요 :");
+//		int movieNum = sc.nextInt();
+		List<Screening> list2 = screening.ticketReservation();
+		for(Screening s : list2) {
+			System.out.println(s.allfull());
 		}
+		System.out.print("상영관을 선택해주세요 : ");
+		int theaterNo = sc.nextInt();
+		int result = screening.Purchase(theaterNo);
+		User u = new User();
+		System.out.println(u);
+		
   }
 	
 }

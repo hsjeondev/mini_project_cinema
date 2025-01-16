@@ -14,10 +14,15 @@ public class ScreeningController {
 	}
 	
 	public int insertMovieInformation(int movieNumber,int theater,String startDate,String runningTime) {
-		
 		Screening sn = new Screening(movieNumber,theater,startDate,runningTime);
-		
 		int result = screening.insertMovieInformation(sn);
+		return result;
+	}
+	public List<Screening> ticketReservation(){
+		return screening.ticketReservation();
+	}
+	public int Purchase(int theaterNo) {
+		int result = screening.Purchase(theaterNo);
 		return result;
 	}
 }

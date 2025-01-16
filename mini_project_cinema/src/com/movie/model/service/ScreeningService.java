@@ -22,13 +22,21 @@ public class ScreeningService {
 	}
 	
 	public int insertMovieInformation(Screening sn) {
-		System.out.println(sn.getMovieNumber());
-		System.out.println(sn.getScreeningNumber());
 		Connection conn = getConnection();
 		int result = screening.insertMovieInformation(conn,sn);
 		close(conn);
 		return result;
-		
-
+	}
+	public List<Screening> ticketReservation(){
+		Connection coon = getConnection();
+		List<Screening> list = screening.ticketReservation(coon);
+		close(coon);
+		return list;
+	}
+	public int Purchase(int theaterNo) {
+		Connection conn = getConnection();
+		int result = screening.Purchase(conn,theaterNo);
+		close(conn);
+		return result;
 	}
 }
