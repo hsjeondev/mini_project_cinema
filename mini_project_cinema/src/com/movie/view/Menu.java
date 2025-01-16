@@ -1,19 +1,20 @@
 package com.movie.view;
 
-import java.util.Scanner;
 import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Scanner;
 import java.util.Set;
+
 import com.movie.controller.MovieController;
 import com.movie.controller.ReservationController;
 import com.movie.controller.ScreeningController;
-import com.movie.controller.UserController;
 import com.movie.controller.TheaterController;
+import com.movie.controller.UserController;
 import com.movie.model.vo.Movie;
-import com.movie.model.vo.Reservation;
+import com.movie.model.vo.Screening;
 import com.movie.model.vo.Theater;
 import com.movie.model.vo.User;
 
@@ -125,6 +126,7 @@ public class Menu {
 		}
 		
 		switch(select) {
+			case 1 : ticketReservation();break;
 			case 2 : myPage(user); break;
 			case 9 : System.out.println("다음에 또 오세요."); return;
 		}
@@ -333,11 +335,7 @@ public class Menu {
 	}
   public void insertMovieInformation() {
 	  System.out.println("=-=상영 정보 추가=-=");
-	  List<Movie> list = screening.movieRank();
-	  System.out.println("-----------영화 정보------------");
-		for(Movie m : list) {
-			System.out.println(m);
-		}
+	  selectMovieList();
 	  List<Theater> list2 = tc.insertMovieInformation();
 	  System.out.println("--------상영관 정보----------");
 	  	for(Theater t : list2) {
@@ -362,11 +360,13 @@ public class Menu {
 			System.out.println(m);
 		}
   }
-  //나
-  /*public void reservation() {
-	  System.out.println("=-=티켓 예매=-=");
-	  List<Screening> list = screening.movieRank();
+
+  public void ticketReservation() {
 	  
-  }*/
+	  	List<Movie> list = screening.movieRank();
+		for(Movie m : list) {
+			System.out.println(m.bestMovie());
+		}
+  }
 	
 }

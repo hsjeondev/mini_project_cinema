@@ -19,12 +19,5 @@ public class ScreeningController {
 		
 		int result = screening.insertMovieInformation(sn);
 		return result;
-		
-		
-//		Theater tr = new Theater(no,seat);
-//		TheaterService ts = new TheaterService();
-//		int result = ts.insertScreeningOne(tr);
-//		return result;
-		
 	}
 }
