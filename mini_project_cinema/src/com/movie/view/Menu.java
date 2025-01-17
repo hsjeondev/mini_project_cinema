@@ -204,6 +204,8 @@ public class Menu {
 			System.out.println("비밀번호가 일치하지 않습니다.");
 		}
 	}
+	
+	
 
 	public void checkReservation(User user) {
 		List<Map<String, Object>> list = new ArrayList<Map<String, Object>>();
