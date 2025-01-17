@@ -1,13 +1,12 @@
 package com.movie.model.vo;
 
 public class Screening {
-	Movie m = new Movie();
 	private int screeningNumber;
 	private String airingDate;
 	private String airingTime;
 	private int movieNumber;
 	private int theater;
-	private int Seat;
+	private int seat;
 	
 	private String movieName;
 	private int moviePrice;
@@ -16,21 +15,26 @@ public class Screening {
 	public String getMovieName() {
 		return movieName;
 	}
+	
 	public void setMovieName(String movieName) {
 		this.movieName = movieName;
 	}
+	
 	public int getMoviePrice() {
 		return moviePrice;
 	}
+	
 	public void setMoviePrice(int moviePrice) {
 		this.moviePrice = moviePrice;
 	}
+	
 	public Screening() {}
-	public Screening(int movieNumber,String movieName,int moviePrice,int Seat) {
+	
+	public Screening(int movieNumber,String movieName,int moviePrice,int seat) {
 		this.movieNumber=movieNumber;
 		this.movieName=movieName;
 		this.moviePrice=moviePrice;
-		this.Seat=Seat;
+		this.seat=seat;
 	}
 	
 	public Screening(int movieNumber,int theater,String airingDate,String airingTime) {
@@ -48,7 +52,7 @@ public class Screening {
 		this.airingTime = airingTime;
 		this.movieNumber = movieNumber;
 		this.theater = theater;
-		this.Seat = seat;
+		this.seat = seat;
 	}
 
 	public int getScreeningNumber() {
@@ -92,17 +96,17 @@ public class Screening {
 	}
 
 	public int getSeat() {
-		return Seat;
+		return seat;
 	}
 
 	public void setSeat(int seat) {
-		Seat = seat;
+		this.seat = seat;
 	}
 
 	@Override
 	public String toString() {
 		return "[ 방영 날짜 " + airingDate + ", 영화 시간="
-				+ airingTime + ", 영화 번호=" + movieNumber + ", 상영관 번호=" + theater + ", 남은 좌석 수=" + Seat + "]";
+				+ airingTime + ", 영화 번호=" + movieNumber + ", 상영관 번호=" + theater + ", 남은 좌석 수=" + seat + "]";
 	}
 	
 	public String date() {
@@ -111,7 +115,7 @@ public class Screening {
 	}
 	
 	public String allfull() {
-		return "[상영관 번호="+movieNumber+", 영화제목 ="+movieName+", 가격 "+moviePrice+", 좌석 "+Seat+" ]";
+		return "[상영관 번호="+movieNumber+", 영화제목 ="+movieName+", 가격 "+moviePrice+", 좌석 "+seat+" ]";
 	}
 	
 }

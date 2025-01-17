@@ -60,9 +60,9 @@ public class Menu {
 			System.out.println("비밀번호 재확인 : ");
 			checkPw = sc.nextLine();
 		}
-		System.out.println("이름 입력 : ");
+		System.out.print("이름 입력 : ");
 		String name = sc.nextLine();
-		System.out.println("전화번호 입력 : ");
+		System.out.print("전화번호 입력 : ");
 		String phone = sc.nextLine();
 		
 		int cnt = uc.isDuplicateMember(id);
@@ -70,7 +70,6 @@ public class Menu {
 			System.out.println("이미 존재하는 아이디입니다.");
 		} else {
 			System.out.println("사용가능한 아이디입니다.");
-			System.out.println("회원가입 진행중~");
 			int result = uc.signInMember(id,pw,name,phone);
 			if(result >0) {
 				System.out.println("성공적으로 회원가입이 완료되었습니다.");
@@ -83,41 +82,47 @@ public class Menu {
 	}
 	
 	public void managerMenu() {
-		System.out.println("=== 관리자 메뉴 ===");
-		System.out.println(" 관리자 메뉴에 오신걸 환영합니다~!");
-		System.out.println("1. 영화 추가");
-		System.out.println("2. 상영관 추가");
-		System.out.println("3. 상영 정보 추가");
-		System.out.println("4. 상영 정보 삭제");
-		System.out.println("0. 로그아웃");
-		System.out.print("메뉴 : ");
-		int menu = sc.nextInt();
-		sc.nextLine();
-		switch(menu) {
-			case 1 : insertMovieOne();break;
-			case 2 : insertScreeningOne();break;
-			case 3 : insertMovieInformation();break;
-			case 4 : break;
-			case 0 : System.out.println("이용해주셔서 감사합니다!");return;
-			default : System.out.println("지금 누른 메뉴는 없는 메뉴입니다.");
+			while(true) {
+				System.out.println("=== 관리자 메뉴 ===");
+				System.out.println(" 관리자 메뉴에 오신걸 환영합니다~!");
+				System.out.println("1. 영화 추가");
+				System.out.println("2. 상영관 추가");
+				System.out.println("3. 상영 정보 추가");
+				System.out.println("4. 상영 정보 삭제");
+				System.out.println("0. 로그아웃");
+				System.out.print("메뉴 : ");
+				int menu = sc.nextInt();
+				sc.nextLine();
+				switch(menu) {
+					case 1 : insertMovieOne();break;
+					case 2 : insertScreeningOne();break;
+					case 3 : insertMovieInformation();break;
+					case 4 : break;
+					case 0 : System.out.println("이용해주셔서 감사합니다!");return;
+					default : System.out.println("지금 누른 메뉴는 없는 메뉴입니다.");
+					}
 			}
 		}
 
 
 
 	public void userMenu(User user) {
-		System.out.println("===== 유저 메뉴 =====");
-		System.out.println(user.getUserName() + "님 환영합니다!");
-		
-		int select = 0;
 		while(true) {
+			System.out.println("===== 유저 메뉴 =====");
+			System.out.println(user.getUserName() + "님 환영합니다!");
+			
 			System.out.println("1. 티켓 예매");
 			System.out.println("2. 마이페이지");
 			System.out.println("9. 로그아웃");
 			try {
 				System.out.print("메뉴 번호 선택 : ");
-				select = sc.nextInt();
-				break;
+				int select = sc.nextInt();
+				
+				switch(select) {
+				case 1 : ticketReservation();break;
+				case 2 : myPage(user); break;
+				case 9 : System.out.println("다음에 또 오세요."); return;
+				}
 			} catch(InputMismatchException e) {
 				System.out.println("번호를 입력해주세요.");
 				sc.nextLine();
@@ -125,11 +130,7 @@ public class Menu {
 			}
 		}
 		
-		switch(select) {
-			case 1 : ticketReservation();break;
-			case 2 : myPage(user); break;
-			case 9 : System.out.println("다음에 또 오세요."); return;
-		}
+		
 		
 	}
 	
@@ -142,6 +143,7 @@ public class Menu {
 			System.out.println("3. 금액 충전");
 			System.out.println("4. 예매 내역 조회");
 			System.out.println("5. 예매 취소");
+			System.out.println("6. 뒤로 가기");
 			try {
 				System.out.print("메뉴 번호 선택 : ");
 				select = sc.nextInt();
@@ -153,9 +155,9 @@ public class Menu {
 
 				case 1 : updateUserOne(user); break;
 				case 3 : chargeAmount(user);break; 
-
 				case 4 : checkReservation(user); break;
 				case 5 : cancleReservation(user); break;
+				case 6 : return;
 				case 9 : System.out.println("다음에 또 오세요."); return;
 				}
 				
