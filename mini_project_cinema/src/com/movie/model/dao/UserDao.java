@@ -98,7 +98,7 @@ public class UserDao {
 		return user;
 	}
 
-	public int ChargeAmount(int amount, int userNo, Connection conn) {
+	public int chargeAmount(int amount, int userNo, Connection conn) {
 		
 		PreparedStatement pstmt = null;
 		int result = 0;

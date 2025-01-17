@@ -147,8 +147,12 @@ public class Menu {
 				sc.nextLine();
 				
 				switch(select) {
+
+				
+
 				case 1 : updateUserOne(user); break;
-				case 3 : ChargeAmount(user);break; 
+				case 3 : chargeAmount(user);break; 
+
 				case 4 : checkReservation(user); break;
 				case 5 : cancleReservation(user); break;
 				case 9 : System.out.println("다음에 또 오세요."); return;
@@ -306,7 +310,7 @@ public class Menu {
 		else System.out.println(menuName+"중 오류가 발생하였습니다.");
 	}
 
-	public void ChargeAmount(User user) {
+	public void chargeAmount(User user) {
 		while(true) {
 		System.out.println("*** 금액충전 ***");
 		System.out.println("충전할 금액을 입력해주세요!");
@@ -320,22 +324,24 @@ public class Menu {
 			System.out.println("다시 입력하시겠습니까( Y/N )");
 			String yesOrNo = sc.next();
 			if("Y".equalsIgnoreCase(yesOrNo)) {
-				ChargeAmount(user);break;
+				chargeAmount(user);break;
 			}else if("N".equalsIgnoreCase(yesOrNo)){
 				System.out.println("안녕히 가세요. 고맙습니다.");return;
 			}else {
 				System.out.println("잘못 입력하셨습니다.");
-				ChargeAmount(user);break;
+				chargeAmount(user);break;
 			}
 		}
-//		int userNo = user.getUserNo();
-//		String userName = user.getUserName();
-//		int result = uc.ChargeAmount(amount, userNo);
-//		if(result > 0) {
-//			System.out.println(userName+"님 "+amount+"원 충전되었습니다.");return;
-//		}else {
-//			System.out.println("금액충전중 문제가 발생하였습니다.");
-//		}    
+
+		int userNo = user.getUserNo();
+		String userName = user.getUserName();
+		int result = uc.chargeAmount(amount, userNo);
+		if(result > 0) {
+			System.out.println(userName+"님 "+amount+"원 충전되었습니다.");return;
+		}else {
+			System.out.println("금액충전중 문제가 발생하였습니다.");
+		}    
+
 	}
 	
 }
