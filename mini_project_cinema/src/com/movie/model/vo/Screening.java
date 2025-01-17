@@ -1,6 +1,7 @@
 package com.movie.model.vo;
 
 public class Screening {
+	Movie m = new Movie();
 	private int screeningNumber;
 	private String airingDate;
 	private String airingTime;
@@ -8,10 +9,38 @@ public class Screening {
 	private int theater;
 	private int Seat;
 	
-
+	private String movieName;
+	private int moviePrice;
+	
+	
+	public String getMovieName() {
+		return movieName;
+	}
+	public void setMovieName(String movieName) {
+		this.movieName = movieName;
+	}
+	public int getMoviePrice() {
+		return moviePrice;
+	}
+	public void setMoviePrice(int moviePrice) {
+		this.moviePrice = moviePrice;
+	}
 	public Screening() {}
-
-
+	public Screening(int movieNumber,String movieName,int moviePrice,int Seat) {
+		this.movieNumber=movieNumber;
+		this.movieName=movieName;
+		this.moviePrice=moviePrice;
+		this.Seat=Seat;
+	}
+	
+	public Screening(int movieNumber,int theater,String airingDate,String airingTime) {
+		this.movieNumber = movieNumber;
+		this.theater = theater;
+		this.airingDate = airingDate;
+		this.airingTime = airingTime;
+	}
+	
+	
 	public Screening(int screeningNumber, String airingDate, String airingTime, int movieNumber, int theater,
 			int seat) {
 		this.screeningNumber = screeningNumber;
@@ -70,14 +99,19 @@ public class Screening {
 		Seat = seat;
 	}
 
+	@Override
+	public String toString() {
+		return "[ 방영 날짜 " + airingDate + ", 영화 시간="
+				+ airingTime + ", 영화 번호=" + movieNumber + ", 상영관 번호=" + theater + ", 남은 좌석 수=" + Seat + "]";
+	}
 	
+	public String date() {
+		return "[ 방영 날짜 " + airingDate + ", 상영관 번호="
+				+ theater+"]";
+	}
 	
-	// 제목
-	// 조회순
-	
-	// 영화 제목 선택하면 
-	// 날짜, 상영관 확인 
-	// 날짜와 상영관 선택하면 시간 선택
-	
+	public String allfull() {
+		return "[상영관 번호="+movieNumber+", 영화제목 ="+movieName+", 가격 "+moviePrice+", 좌석 "+Seat+" ]";
+	}
 	
 }
