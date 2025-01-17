@@ -55,4 +55,11 @@ public class UserService {
 		return result;
 	}
 
+	public int deleteMember(User user) {
+		Connection conn = getConnection();
+		int result = ud.deleteMember(user,conn);
+		close(conn);
+		return result;
+	}
+
 }
