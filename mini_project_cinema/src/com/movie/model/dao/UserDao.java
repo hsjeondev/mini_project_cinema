@@ -172,5 +172,27 @@ public class UserDao {
 		return result;
 	}
 
+	public int deleteMember(User user, Connection conn) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		
+		try {
+			String sql = "DELETE FROM `user` WHERE user_id = ?";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, user.getUserId());
+			result = pstmt.executeUpdate();
+			
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			try {
+				pstmt.close();
+			}catch(Exception e) {
+				e.printStackTrace();
+			}
+		}
+		return result;
+	}
+
 
 }

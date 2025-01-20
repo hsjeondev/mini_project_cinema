@@ -43,5 +43,10 @@ public class UserController {
 		return result;
 	}
 
+	public int deleteMember(User user) {
+		int result = us.deleteMember(user);
+		return result;
+	}
+
 
 }
